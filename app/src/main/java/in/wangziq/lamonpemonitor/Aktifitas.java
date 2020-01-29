@@ -1,7 +1,9 @@
 package in.wangziq.lamonpemonitor;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,10 +24,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Aktifitas extends AppCompatActivity {
+public class Aktifitas extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     EditText edtTitle;
     EditText edtMessage;
     final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
@@ -36,10 +41,28 @@ public class Aktifitas extends AppCompatActivity {
     String TOPIC;
     float x1,x2,y1,y2;
 
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aktifitas);
+
+        Button button = (Button) findViewById(R.id.btnTime);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "time picker");
+            }
+        });
+
+
+
         edtTitle = findViewById(R.id.edtTitle);
         edtMessage = findViewById(R.id.edtMessage);
         Button btnSend = findViewById(R.id.btnSend);
@@ -62,7 +85,9 @@ public class Aktifitas extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.e(TAG, "onCreate: " + e.getMessage() );
                 }
+
                 sendNotification(notification);
+
             }
         });
 

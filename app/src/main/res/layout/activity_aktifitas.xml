@@ -58,6 +58,18 @@
             android:background="@android:drawable/editbox_background_normal"/>
     </LinearLayout>
 
+    <Button
+        style="@style/Base.Widget.AppCompat.Button"
+        android:id="@+id/btnTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@color/colorAccent"
+        android:layout_marginTop="40dp"
+        android:text="Pilih waktu" />
+
 
     <Button
         style="@style/Base.Widget.AppCompat.Button"
